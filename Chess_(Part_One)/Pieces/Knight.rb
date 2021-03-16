@@ -1,11 +1,13 @@
 require_relative "Piece"
 
 class Knight < Stepping
+    include Stepping
+
     def initialize(name)
         @name = name
     end
 
-    def self.valid_moves(pos)
+    def self.valid_moves?(pos)
         possible_moves = []
         (0...8).each do |idx1|
             (0...8).each do |idx2|
