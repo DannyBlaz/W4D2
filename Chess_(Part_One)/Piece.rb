@@ -1,3 +1,9 @@
+require_relative "Knight"
+require_relative "Rook"
+require_relative "Bishop"
+require_relative "King"
+require_relative "Queen"
+require_relative "Pawn"
 
 class Piece
     attr_reader :location
@@ -12,32 +18,28 @@ end
 class NullPiece < Piece
 
     
-    
 end
 
-class Sliding
+class Sliding < Piece
 
     def initialize(location)
         super
-
     end
     
 end
 
-class Stepping
+class Stepping < Piece
 
     def initialize(location)
         super
-
     end
     
 end
 
-class Pawn
+class Pawn < Piece
 
     def initialize(location)
         super
-
     end
     
 end
