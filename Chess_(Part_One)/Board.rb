@@ -4,10 +4,8 @@ require_relative "Module"
 class Board
     attr_accessor :board
 
-    
-    
     def initialize(@piece)
-        @board = Array.new(8) { Array.new(8) }
+        @board = Array.new(8) { Array.new(8, [])}
         @piece = Piece.new
         
     end
@@ -35,7 +33,7 @@ class Board
             raise "Not a valid move"
         end
         
-        @board[start_row][start_col] = NullPiece
+        @board[start_row][start_col] = nil
         @board[end_row][end_col] = piece
         self.location = [end_row][end_col]
     end
