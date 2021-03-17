@@ -1,44 +1,16 @@
+require_relative '../Piece'
+require_relative '../Stepable'
 
-
-class King
-    include Stepping
+class King < Piece
+    include Stepable
+    attr_reader :sym, :pos, :board, :color
     
-    def self.valid_moves?(pos)
-        possible_moves = []
-        if !pos.empty?
-            (0...8).each do |idx1|
-                (0...8).each do |idx2|
-                    #diagonal
-                    if pos[0] + 1 == idx1 || pos[0] - 1 == idx1
-                        if pos[1] + 1 == idx2 || pos[1] - 1 == idx2
-                            possible_moves << [idx1,idx2]
-                        end
-                    end
-                    #forward
-                    if pos[0] + 1 == idx1 || pos[0] - 1 == idx1
-                        if pos[1] == idx2 || pos[1] == idx2
-                            possible_moves << [idx1,idx2]
-                        end
-                    end
-                    #sideways
-                    if pos[0] == idx1 || pos[0] == idx1
-                        if pos[1] + 1 == idx2 || pos[1] - 1 == idx2
-                            possible_moves << [idx1,idx2]
-                        end
-                    end
-                end
-
-            end
-        end
-        possible_moves
+    def initialize(pos, sym, board, color)
+        super
+        @symbol = sym
     end
 
-
-
+    def move_diffs
+       
     end
-
-    def initialize(name)
-        @name = name
-    end
-    
 end
