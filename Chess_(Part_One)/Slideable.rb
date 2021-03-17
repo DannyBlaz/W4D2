@@ -72,25 +72,28 @@ module Slideable
 
         case dx
         when 0
-          #code
+          (0...8).each { |idx| dx_array << idx }
         when 1
-          #code
+          (cur_x...8).each { |idx| dx_array << idx unless idx == cur_x }
         when -1 
-          #code
+          (0...cur_x).each { |idx| dx_array << idx }
         end
 
         case dy
         when 0
-          #code
+          (0...8).each { |idx| dy_array << idx }
         when 1
-          #code
+          (cur_y...8).each { |idx| dy_array << idx unless idx == cur_y }
         when -1 
-          #code
+          (0...cur_y).each { |idx| dy_array << idx }
         end
 
         dx_dy = dx_array.zip(dy_array)
 
         #loop through dx_dy to check for nils, if false => valid_moves << arr.
+        dx_dy.each do |arr|
+          valid_moves << arr unless arr.include?(nil)
+        end
         
         # if the new position is:
           # 1. invalid (off the board)
@@ -105,6 +108,17 @@ module Slideable
           #   * if opposite color, add position to moves array
           #   * if same color, don't add position to moves array
 
+        board = self.board
+        stop_same_color = []
+        stop_diff_color = []
+        valid_moves.each_with_index do |move, idx|
+          cur_piece = board[move[0]][move[1]]
+          if cur_piece.color == self.color
+            return stop_same_color << valid_moves[idx - 1]
+          elsif cur_piece.color != self.color
+            return stop_diff_color << move
+          end
+        end
   
       # return the final moves array
       valid_moves
